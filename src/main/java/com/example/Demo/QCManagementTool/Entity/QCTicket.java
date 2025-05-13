@@ -45,5 +45,7 @@ public class QCTicket {
 	
 	@OneToMany(mappedBy = "qcTicket",cascade = CascadeType.ALL)
 	private List<Validation> validations;
+	
+	
 
 }

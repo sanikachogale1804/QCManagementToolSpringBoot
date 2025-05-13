@@ -29,7 +29,7 @@ public class Camera {
 	@Column(nullable = false)
 	private Long cameraId;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String ip;
 	
 	@Column(nullable = false)
@@ -45,5 +45,6 @@ public class Camera {
 	@OneToMany(mappedBy = "camera", cascade = CascadeType.ALL)
 	private List<QCTicket> qcTickets;
 
+	
 
 }
