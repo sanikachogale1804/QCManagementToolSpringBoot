@@ -25,9 +25,13 @@ public class TicketCreation {
 	
 	private String siteId; 
 	
-	private String cameraId;
+	private String cameraId1;
 	
-	private String ipAddress;
+	private String cameraId2;
+	
+	private String ipAddress1;
+	
+	private String ipAddress2;
 	
 	private String simIccid;
 	
