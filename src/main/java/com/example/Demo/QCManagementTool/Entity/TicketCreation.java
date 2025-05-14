@@ -23,7 +23,7 @@ public class TicketCreation {
 	
 	private String iasspName;
 	
-	private String siteId;
+	private String siteId; 
 	
 	private String cameraId;
 	

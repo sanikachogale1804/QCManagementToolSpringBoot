@@ -32,16 +32,18 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http
-		   .csrf(customizer -> customizer.disable())
-		   .authorizeHttpRequests(request -> request
-				   .requestMatchers("/register", "/login")  // Add the correct paths here
-				   .permitAll()  // Permit these endpoints without authentication
-				   .anyRequest().authenticated())  // All other requests require authentication
-		   .httpBasic(Customizer.withDefaults())
-		   .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-		   .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-		   .build();
+	    return http
+	        .cors(Customizer.withDefaults()) // 👈 Enable CORS from the bean
+	        .csrf(csrf -> csrf.disable())
+	        .authorizeHttpRequests(request -> request
+	            .requestMatchers("/register", "/login").permitAll()
+	            .requestMatchers("/ticketCreation/**").permitAll()
+	            .anyRequest().authenticated()
+	        )
+	        .httpBasic(Customizer.withDefaults())
+	        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+	        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+	        .build();
 	}
 
 //	@Bean
