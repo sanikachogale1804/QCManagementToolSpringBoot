@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,9 @@ import org.springframework.util.StreamUtils;
 
 import jakarta.servlet.http.HttpServletResponse;
 
+@CrossOrigin(origins = {
+	    "http://localhost:3000"
+	})
 @RestController
 public class TicketCreationController {
 	
@@ -37,7 +41,6 @@ public class TicketCreationController {
 	@Autowired
 	private FileService fileService;
 	
-//to upload image
 	@PostMapping("ticketCreation/{ticketCreationId}/image")
 	   public ResponseEntity<String> uploadUserImage(@RequestParam("networkImage") MultipartFile image, @PathVariable Long ticketCreationId) throws IOException, java.io.IOException {
 	       String imageName = fileService.uploadFile(image, imagePath);
