@@ -45,6 +45,9 @@ public class TicketCreation {
 	@Lob
 	private String networkImage;
 
+	private String apnConfigImage;
+	
+	private String apnConfigStatus; // "Correct" or "Incorrect"
 
 
 }
