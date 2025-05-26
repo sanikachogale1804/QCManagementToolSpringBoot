@@ -49,5 +49,16 @@ public class TicketCreation {
 	
 	private String apnConfigStatus; // "Correct" or "Incorrect"
 
+	@Lob
+    private String liveViewImage;
 
+    private String liveViewQuality;
+
+    @Lob
+    private String configScreenshot;
+
+    private Integer sdCardStorage;
+
+    @Lob
+    private String sdPlaybackImage;
 }
