@@ -75,7 +75,23 @@ public class TicketCreationController {
 	    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
 	    StreamUtils.copy(resource, response.getOutputStream());
 	}
-
+	
+	@PostMapping("ticketCreation/{ticketCreationId}/liveViewImage")
+	public ResponseEntity<String> uploadliveViewImage(@RequestParam("liveViewImage") MultipartFile image, @PathVariable Long ticketCreationId) throws IOException {
+	    String imageName = fileService.uploadFile(image, imagePath);
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).get();
+	    ticketCreation.setLiveViewImage(imageName);
+	    ticketCreationRepository.save(ticketCreation);
+	    return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping(value = "ticketCreation/{ticketCreationId}/liveViewImage")
+	public void serveLiveViewImage(@PathVariable Long ticketCreationId, HttpServletResponse response) throws IOException {
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).orElseThrow(() -> new RuntimeException("Ticket not found"));
+	    InputStream resource = fileService.getResource(imagePath, ticketCreation.getLiveViewImage());
+	    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+	    StreamUtils.copy(resource, response.getOutputStream());
+	}
 	
 
 }
