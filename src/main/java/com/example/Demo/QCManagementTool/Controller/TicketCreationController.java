@@ -93,5 +93,89 @@ public class TicketCreationController {
 	    StreamUtils.copy(resource, response.getOutputStream());
 	}
 	
+	@PostMapping("ticketCreation/{ticketCreationId}/videoConfigImage")
+	public ResponseEntity<String> uploadvideoConfigImage(@RequestParam("videoConfigImage") MultipartFile image, @PathVariable Long ticketCreationId) throws IOException {
+	    String imageName = fileService.uploadFile(image, imagePath);
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).get();
+	    ticketCreation.setVideoConfigImage(imageName);
+	    ticketCreationRepository.save(ticketCreation);
+	    return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
+	}
 
+	@GetMapping(value = "ticketCreation/{ticketCreationId}/videoConfigImage")
+	public void serveVideoConfigImage(@PathVariable Long ticketCreationId, HttpServletResponse response) throws IOException {
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).orElseThrow(() -> new RuntimeException("Ticket not found"));
+	    InputStream resource = fileService.getResource(imagePath, ticketCreation.getVideoConfigImage());
+	    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+	    StreamUtils.copy(resource, response.getOutputStream());
+	}
+	
+	@PostMapping("ticketCreation/{ticketCreationId}/ftpSettingsImage")
+	public ResponseEntity<String> uploadftpSettingsImage(@RequestParam("ftpSettingsImage") MultipartFile image, @PathVariable Long ticketCreationId) throws IOException {
+	    String imageName = fileService.uploadFile(image, imagePath);
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).get();
+	    ticketCreation.setFtpSettingsImage(imageName);
+	    ticketCreationRepository.save(ticketCreation);
+	    return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping(value = "ticketCreation/{ticketCreationId}/ftpSettingsImage")
+	public void serveFtpSettingsImage(@PathVariable Long ticketCreationId, HttpServletResponse response) throws IOException {
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).orElseThrow(() -> new RuntimeException("Ticket not found"));
+	    InputStream resource = fileService.getResource(imagePath, ticketCreation.getFtpSettingsImage());
+	    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+	    StreamUtils.copy(resource, response.getOutputStream());
+	}
+	
+	@PostMapping("ticketCreation/{ticketCreationId}/ntpSettingsImage")
+	public ResponseEntity<String> uploadntpSettingsImage(@RequestParam("ntpSettingsImage") MultipartFile image, @PathVariable Long ticketCreationId) throws IOException {
+	    String imageName = fileService.uploadFile(image, imagePath);
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).get();
+	    ticketCreation.setNtpSettingsImage(imageName);
+	    ticketCreationRepository.save(ticketCreation);
+	    return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping(value = "ticketCreation/{ticketCreationId}/ntpSettingsImage")
+	public void serveNtpSettingsImage(@PathVariable Long ticketCreationId, HttpServletResponse response) throws IOException {
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).orElseThrow(() -> new RuntimeException("Ticket not found"));
+	    InputStream resource = fileService.getResource(imagePath, ticketCreation.getNtpSettingsImage());
+	    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+	    StreamUtils.copy(resource, response.getOutputStream());
+	}
+	
+	@PostMapping("ticketCreation/{ticketCreationId}/playbackScreenshotImage")
+	public ResponseEntity<String> uploadplaybackScreenshotImage(@RequestParam("playbackScreenshotImage") MultipartFile image, @PathVariable Long ticketCreationId) throws IOException {
+	    String imageName = fileService.uploadFile(image, imagePath);
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).get();
+	    ticketCreation.setPlaybackScreenshot(imageName);
+	    ticketCreationRepository.save(ticketCreation);
+	    return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping(value = "ticketCreation/{ticketCreationId}/playbackScreenshotImage")
+	public void servePlaybackScreenshotImage(@PathVariable Long ticketCreationId, HttpServletResponse response) throws IOException {
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).orElseThrow(() -> new RuntimeException("Ticket not found"));
+	    InputStream resource = fileService.getResource(imagePath, ticketCreation.getPlaybackScreenshot());
+	    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+	    StreamUtils.copy(resource, response.getOutputStream());
+	}
+	
+	@PostMapping("ticketCreation/{ticketCreationId}/additionalImage")
+	public ResponseEntity<String> uploadAdditionalImage(@RequestParam("additionalImage") MultipartFile image, @PathVariable Long ticketCreationId) throws IOException {
+	    String imageName = fileService.uploadFile(image, imagePath);
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).get();
+	    ticketCreation.setAdditionalImages(imageName);
+	    ticketCreationRepository.save(ticketCreation);
+	    return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping(value = "ticketCreation/{ticketCreationId}/additionalImage")
+	public void serveAdditionalImages(@PathVariable Long ticketCreationId, HttpServletResponse response) throws IOException {
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).orElseThrow(() -> new RuntimeException("Ticket not found"));
+	    InputStream resource = fileService.getResource(imagePath, ticketCreation.getAdditionalImages());
+	    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+	    StreamUtils.copy(resource, response.getOutputStream());
+	}
+	
 }
