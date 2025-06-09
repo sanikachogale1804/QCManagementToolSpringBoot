@@ -55,10 +55,29 @@ public class TicketCreation {
     private String liveViewQuality;
 
     @Lob
-    private String configScreenshot;
-
-    private Integer sdCardStorage;
-
+    private String videoConfigImage;
+    
+    private String resolution;
+    
+//  FTP Configuration
     @Lob
-    private String sdPlaybackImage;
+    private String ftpSettingsImage;
+    
+//  NTP Configuration
+    private String ntpSettingsImage;
+    
+    // SD Card Status
+    private String sdCardStoragePercentage; 
+    
+    private String playbackScreenshot;
+    
+    // ✅ Final Submission
+    private String finalStatus; 
+    
+    @Lob
+    private String finalRemarks;
+    
+    @Lob
+    private String additionalImages;
+    
 }

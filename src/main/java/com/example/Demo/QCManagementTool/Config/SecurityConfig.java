@@ -40,6 +40,8 @@ public class SecurityConfig {
 	            .requestMatchers("/auth/me").permitAll() 
 	            .requestMatchers("/ticketCreation").permitAll()
 	            .requestMatchers("/ticketCreation/**").permitAll()
+	         // TO THIS (or restrict more specifically if needed):
+	            .requestMatchers("/ticketCreation/*/image").authenticated()
 	            .anyRequest().authenticated()
 	        )
 	        .httpBasic(Customizer.withDefaults())

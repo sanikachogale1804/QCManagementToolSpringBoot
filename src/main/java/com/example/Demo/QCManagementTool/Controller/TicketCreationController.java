@@ -59,6 +59,23 @@ public class TicketCreationController {
 	       StreamUtils.copy(resource, response.getOutputStream());
 	   }
 	
+	@PostMapping("ticketCreation/{ticketCreationId}/apnConfigImage")
+	public ResponseEntity<String> uploadApnConfigImage(@RequestParam("apnConfigImage") MultipartFile image, @PathVariable Long ticketCreationId) throws IOException {
+	    String imageName = fileService.uploadFile(image, imagePath);
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).get();
+	    ticketCreation.setApnConfigImage(imageName);
+	    ticketCreationRepository.save(ticketCreation);
+	    return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping(value = "ticketCreation/{ticketCreationId}/apnConfigImage")
+	public void serveApnConfigImage(@PathVariable Long ticketCreationId, HttpServletResponse response) throws IOException {
+	    TicketCreation ticketCreation = ticketCreationRepository.findById(ticketCreationId).orElseThrow(() -> new RuntimeException("Ticket not found"));
+	    InputStream resource = fileService.getResource(imagePath, ticketCreation.getApnConfigImage());
+	    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+	    StreamUtils.copy(resource, response.getOutputStream());
+	}
+
 	
 
 }
